@@ -2,60 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
-	private Collider2D floorCollider;
+	private Animator playerAnim;
 	public float speed;
 	public float jumpForce;
-	private bool canJump;
-	public GameObject floor;
+	bool facingRight = true;
+	bool grounded = false;
+	public Transform groundCheck;
+	float groundRadius = 0.2f;
+	public LayerMask whatIsGround;
+
 
 	void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
-		floorCollider = floor.GetComponent<BoxCollider2D> ();
+		playerAnim = GetComponent<Animator> ();
 	}
 
 	void FixedUpdate()
 	{
-		//float moveHorizontal = Input.GetAxis ("Horizontal");
-		//Vector2 movement = new Vector2 (moveHorizontal, 0f);
-		//rb2d.AddForce (movement * speed);
+		//Ground check
+		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+		playerAnim.SetBool ("Ground", grounded);
 
-		if (Input.GetKey ("d"))
-		{
-			rb2d.velocity = new Vector2 (speed, rb2d.velocity.y);
-		} 
-		else if (Input.GetKey ("a")) 
-		{
-			rb2d.velocity = new Vector2 (-speed, rb2d.velocity.y);
-		} 
-		else 
-		{
-			rb2d.velocity = new Vector2 (0f, rb2d.velocity.y);
-		}
+		playerAnim.SetFloat ("vSpeed", rb2d.velocity.y);
 
+		//Movement
+		float move = Input.GetAxis ("Horizontal");
+		rb2d.velocity = new Vector2 (move * speed, rb2d.velocity.y);
+		playerAnim.SetFloat ("Speed", Mathf.Abs (move));
 
-
+		//Direction check
+		if (move > 0 && !facingRight) 
+			Flip ();	
+		else if (move < 0 && facingRight)
+			Flip ();
 	}
 
-	void LateUpdate()
+	//Flip direction function
+	void Flip ()
 	{
-		if (Physics2D.IsTouching(GetComponent<CapsuleCollider2D> (), floorCollider)) 
+		facingRight = !facingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
+
+	void Update()
+	{
+		//Jump Code
+		if (grounded && Input.GetButtonDown ("Jump")) 
 		{
-			canJump = true;
+			playerAnim.SetBool ("Ground", false);
+			rb2d.AddForce(new Vector2 (0, jumpForce));
 		} 
-		else 
-		{
-			canJump = false;
-		}
-
-		//Vector2 jumping = new Vector2 (0f, jumpForce);
-
-		if (Input.GetButtonDown("Jump") && canJump)
-		{
-			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
-		}
 	}
 }
