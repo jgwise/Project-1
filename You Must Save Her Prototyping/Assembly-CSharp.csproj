@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AuraShowHide.cs" />
+     <Compile Include="Assets\BeamController.cs" />
+     <Compile Include="Assets\BeamPivotController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Git Repositories/Prototyping/You Must Save Her Prototyping/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>

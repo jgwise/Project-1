@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour {
 	public Transform groundCheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
-
+	private Animation lightAura;
+	public Transform playerTransform;
 
 	void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		playerAnim = GetComponent<Animator> ();
+		playerTransform = GetComponent<Transform> ();
 	}
 
 	void FixedUpdate()
