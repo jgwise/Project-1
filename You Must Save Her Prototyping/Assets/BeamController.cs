@@ -26,7 +26,7 @@ public class BeamController : MonoBehaviour {
 				beamCol.enabled = true;
 			} else if (Input.GetKeyUp (KeyCode.Mouse0)) {
 				lightBeam.enabled = false;	
-				beamCol.enabled = true;
+				beamCol.enabled = false;
 			}
 		}
 	}
