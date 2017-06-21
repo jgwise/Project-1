@@ -2,10 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BeamController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="67" Column="1" />
-      <File FileName="Assets\BeamPivotController.cs" Line="38" Column="1" />
-      <File FileName="Assets\AuraShowHide.cs" Line="5" Column="14" />
-      <File FileName="Assets\BeamController.cs" Line="18" Column="29" />
+      <File FileName="Assets\BeamController.cs" Line="48" Column="1" />
+      <File FileName="Assets\EnemyHealth.cs" Line="19" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
